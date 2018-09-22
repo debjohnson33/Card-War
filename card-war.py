@@ -47,6 +47,9 @@ class Hand:
     def add_card(self,card):
         self.cards.append(card)
         self.value += values[card.rank]
+    
+    def clear_hand(self):
+        self.cards.pop() #only removing 1 since we're playing 1 card at a time anyway
 
 def hit(deck,hand):
     single_card = deck.deal()
@@ -87,10 +90,8 @@ while True:
     dealer_hand = Hand()
     dealer_hand.add_card(deck.deal())
 
-    show_all(player_hand,dealer_hand)
-
     while playing:
-        
+        show_all(player_hand,dealer_hand)
         if player_hand.value > dealer_hand.value:
             player_wins(player_hand,dealer_hand)
             player_hand.points += 1
@@ -101,9 +102,14 @@ while True:
             dealer_hand.points += 1
         print("\n Player points: " + str(player_hand.points))
         print("\n Dealer points: " + str(dealer_hand.points))
+        
+        player_hand.clear_hand()
+        dealer_hand.clear_hand()
 
-        player_hand.add_card(deck.deal())
-        dealer_hand.add_card(deck.deal())
+        next_hand = input("Another hand? y/n ")
+        if next_hand[0].lower() == 'y':
+            hit(deck,player_hand)
+            hit(deck,dealer_hand)
 
         if deck.length() == 0:
             new_game = input("Would you like to play again? y/n ")
