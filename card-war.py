@@ -27,6 +27,9 @@ class Deck:
         for card in self.deck:
             deck_comp += '\n' + card.__str__()
         return "The deck has: " + deck_comp
+
+    def length(self):
+        return len(self.deck)    
     
     def shuffle(self):
         random.shuffle(self.deck)
@@ -102,8 +105,8 @@ while True:
         player_hand.add_card(deck.deal())
         dealer_hand.add_card(deck.deal())
 
-        if len(deck) == 0:
-            new_game = input("Would you like to play again? y/n")
+        if deck.length() == 0:
+            new_game = input("Would you like to play again? y/n ")
 
             if new_game[0].lower() == 'y':
                 playing = True
@@ -115,3 +118,5 @@ while True:
                 break
         else:
             continue
+    else:
+        break
