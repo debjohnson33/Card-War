@@ -95,9 +95,9 @@ while True:
             tie(player_hand,dealer_hand)
         else:
             dealer_wins(player_hand,dealer_hand)
-            dealer_hand += 1
-        print("\n Player points: {}").format(player_hand.points)
-        print("\n Dealer points: {}").format(dealer_hand.points)
+            dealer_hand.points += 1
+        print("\n Player points: " + str(player_hand.points))
+        print("\n Dealer points: " + str(dealer_hand.points))
 
         player_hand.add_card(deck.deal())
         dealer_hand.add_card(deck.deal())
@@ -109,8 +109,8 @@ while True:
                 playing = True
                 continue
             else:
-                print("\n Player points: {}").format(player_hand.points)
-                print("\n Dealer points: {}").format(dealer_hand.points)
+                print("\n Player points: " + str(player_hand.points))
+                print("\n Dealer points: " + str(dealer_hand.points))
                 print("Thank you for playing")
                 break
         else:
