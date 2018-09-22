@@ -1,5 +1,6 @@
 import random
 
+ # SET UP GLOBALS FOR CARDS
 suits = ('Hearts', 'Diamond', 'Spades', 'Clubs')
 ranks = ('Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace')
 values = {'Two':2, 'Three':3, 'Four':4, 'Five':5, 'Six':6, 'Seven':7, 'Eight':8, 'Nine':9, 'Ten':10, 'Jack':11, 'Queen':12, 'King':13, 'Ace':14}
@@ -55,4 +56,15 @@ def show_all(player,dealer):
     print("PLAYERS HAND:")
     for card in player.cards:
         print(card)
+
+def player_wins(player,dealer):
+    print("PLAYER WINS!")
+
+def dealer_wins(player,dealer):
+    print("DEALER WINS!")
+
+def tie(player,dealer):
+    print("TIE!")
+
+
 
