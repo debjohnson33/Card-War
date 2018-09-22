@@ -39,6 +39,7 @@ class Hand:
     def __init__(self):
         self.cards =[]
         self.value = 0
+        self.points = 0
 
     def add_card(self,card):
         self.cards.append(card)
@@ -66,5 +67,51 @@ def dealer_wins(player,dealer):
 def tie(player,dealer):
     print("TIE!")
 
+# GAME PLAY
+while True:
+    playing = True
+    # Opening statement
+    print("Welcome to Card War!")
 
+    # Create/shuffle deck
+    deck = Deck()
+    deck.shuffle()
 
+    # Deal card to player and dealer
+    player_hand = Hand()
+    player_hand.add_card(deck.deal())
+    
+    dealer_hand = Hand()
+    dealer_hand.add_card(deck.deal())
+
+    show_all(player_hand,dealer_hand)
+
+    while playing:
+        
+        if player_hand.value > dealer_hand.value:
+            player_wins(player_hand,dealer_hand)
+            player_hand.points += 1
+        elif player_hand.value == dealer_hand.value:
+            tie(player_hand,dealer_hand)
+        else:
+            dealer_wins(player_hand,dealer_hand)
+            dealer_hand += 1
+        print("\n Player points: {}").format(player_hand.points)
+        print("\n Dealer points: {}").format(dealer_hand.points)
+
+        player_hand.add_card(deck.deal())
+        dealer_hand.add_card(deck.deal())
+
+        if len(deck) == 0:
+            new_game = input("Would you like to play again? y/n")
+
+            if new_game[0].lower() == 'y':
+                playing = True
+                continue
+            else:
+                print("\n Player points: {}").format(player_hand.points)
+                print("\n Dealer points: {}").format(dealer_hand.points)
+                print("Thank you for playing")
+                break
+        else:
+            continue
