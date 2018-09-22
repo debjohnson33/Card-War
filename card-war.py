@@ -43,3 +43,16 @@ class Hand:
         self.cards.append(card)
         self.value += values[card.rank]
 
+def hit(deck,hand):
+    single_card = deck.deal()
+    hand.add_card(single_card)
+
+def show_all(player,dealer):
+    print("DEALERS HAND:")
+    for card in dealer.cards:
+        print(card)
+    print("\n")
+    print("PLAYERS HAND:")
+    for card in player.cards:
+        print(card)
+
