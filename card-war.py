@@ -1,7 +1,7 @@
 import random
 
  # SET UP GLOBALS FOR CARDS
-suits = ('Hearts', 'Diamond', 'Spades', 'Clubs')
+suits = ('Hearts', 'Diamonds', 'Spades', 'Clubs')
 ranks = ('Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace')
 values = {'Two':2, 'Three':3, 'Four':4, 'Five':5, 'Six':6, 'Seven':7, 'Eight':8, 'Nine':9, 'Ten':10, 'Jack':11, 'Queen':12, 'King':13, 'Ace':14}
 
@@ -49,11 +49,18 @@ class Hand:
         self.value += values[card.rank]
     
     def clear_hand(self):
-        self.cards.pop() #only removing 1 since we're playing 1 card at a time anyway
+        try:
+            self.cards.pop() #only removing 1 since we're playing 1 card at a time anyway
+            self.value = 0
+        except:
+            print("No more cards left!")
 
 def hit(deck,hand):
-    single_card = deck.deal()
-    hand.add_card(single_card)
+    try:
+        single_card = deck.deal()
+        hand.add_card(single_card)
+    except:
+        print("No more cards!")
 
 def show_all(player,dealer):
     print("DEALERS HAND:")
@@ -110,19 +117,20 @@ while True:
         if next_hand[0].lower() == 'y':
             hit(deck,player_hand)
             hit(deck,dealer_hand)
-
-        if deck.length() == 0:
-            new_game = input("Would you like to play again? y/n ")
-
-            if new_game[0].lower() == 'y':
-                playing = True
-                continue
-            else:
-                print("\n Player points: " + str(player_hand.points))
-                print("\n Dealer points: " + str(dealer_hand.points))
-                print("Thank you for playing")
-                break
         else:
+            print("\n Player points: " + str(player_hand.points))
+            print("\n Dealer points: " + str(dealer_hand.points))
+            playing = False
+    if deck.length() == 0 or playing == False:
+        new_game = input("\n Would you like to play again? y/n ")
+
+        if new_game[0].lower() == 'y':
+            playing = True
             continue
+        else:
+            print("\n Player points: " + str(player_hand.points))
+            print("\n Dealer points: " + str(dealer_hand.points))
+            print("Thank you for playing")
+            break
     else:
-        break
+        continue
